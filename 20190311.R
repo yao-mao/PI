@@ -19,14 +19,15 @@ Air9 <-filter(X201809,grepl("盧秀燕", X201809$Page_Name)==TRUE)
 GLdata789 <- rbind(GL7,GL8,GL9)
 Airdata789 <- rbind(Air7,Air8,Air9)
 
-GLAir789 <- rbind(GLdata789,Airdata789)
+#GLAir789 <- rbind(GLdata789,Airdata789) #不需要合併，會讓線合在一起
 #製圖
 
-GLAir789$Date=as.POSIXct(GLAir789$Date, format="%Y/%m/%d %H:%M:%S")
+GLdata789$Date=as.POSIXct(GLdata789$Date, format="%Y/%m/%d %H:%M:%S")
+Airdata789$Date=as.POSIXct(Airdata789$Date, format="%Y/%m/%d %H:%M:%S")
 
-plot(GLAir789$Date, GLAir789$Comment_Count, type = "p")
-
-     
+plot(GLdata789$Date, GLdata789$LIKE_COUNT, type = "p", col="blue")
+lines(Airdata789$Date, Airdata789$LIKE_COUNT,type="p", col="red")
+?lines     
 #############
 
 X201810 <- read_csv("201810_data.csv")
@@ -52,8 +53,14 @@ Air13 <-filter(X201901,grepl("盧秀燕", X201901$Page_Name)==TRUE)
 GLdata4 <- rbind(GL10,GL11,GL12,GL13)
 Airdata4 <- rbind(Air10,Air11,Air12,Air13)
 
-GLAir4 <- rbind(GLdata4,Airdata4)
+#GLAir4 <- rbind(GLdata4,Airdata4)
 
 #製圖
 
-plot(GLAir4$Date, GLAir4$Comment_Count, type = "p")
+GLdata4$Date=as.POSIXct(GLdata4$Date, format="%Y/%m/%d %H:%M:%S")
+Airdata4$Date=as.POSIXct(Airdata4$Date, format="%Y/%m/%d %H:%M:%S")
+
+plot(GLdata4$Date, GLdata4$LIKE_COUNT, type = "p", col="blue")
+lines(Airdata4$Date, Airdata4$LIKE_COUNT,type="p", col="red")
+#盧秀燕的發文數逐月上升，於12月和隔年一月下降
+#林佳龍的發文數亦有此趨勢
